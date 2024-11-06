@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Saving charts</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Saving charts</h1>
+
+
+
+<p>This article covers best practice guidance for saving charts as
+images. This may be as a standalone image file, or embedded in a
+document produced using R Markdown.</p>
+<p>This guidance follows recommendations in the <a href="https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-charts/#section-4">Government
+Analysis Function charts guidance</a>.</p>
+<p>In summary, the following good practice is recommended:</p>
+<ul>
+<li><p>Save charts in SVG image format.</p></li>
+<li><p>Size a chart to be roughly the same width as the content
+surrounding it.</p></li>
+<li><p>For landscape charts on an A4 page, 159 mm x 100 mm are good
+dimensions.</p></li>
+<li><p>Remember to include alt text when including charts in an R
+Markdown document.</p></li>
+</ul>
+<div id="file-format" class="section level2">
+<h2>File format</h2>
+<p>The best format to save images of charts is Scalable Vector Graphic
+(SVG) format. SVG files retain the same quality regardless of the size
+they are viewed at. This means SVG images are more accessible than other
+image formats such as JPG or PNG.</p>
+<p>You can find an <a href="https://www.gov.uk/government/publications/examples-of-visual-content-to-use-on-govuk/examples-of-visual-content-to-use-on-govuk#image-formats-for-charts">example
+of a chart image in an SVG, JPEG and PNG format on GOV.UK</a>.</p>
+<p>If you cannot use an SVG image, then a JPG or PNG image is
+acceptable.</p>
+</div>
+<div id="size-and-dimensions" class="section level2">
+<h2>Size and dimensions</h2>
+<p>A chart should follow the flow of the content surrounding it. It
+should be roughly the same width as the text before and after the
+image.</p>
+<p>The dimensions of your chart will depend on where you plan to use it.
+For example, if you’re using a page-based document such as Microsoft
+Word, and would like to include a landscape image on an A4 portrait
+page, a width of 159 mm and height of 100 mm works well.</p>
+<p>When using the SVG file format, actual saved image dimensions will be
+exactly as specified. However, when using JPG or PNG formats, they may
+not be. This is because these file formats are also influenced by DPI
+(dots per inch). DPI is a measure of the resolution of an image; the
+higher the DPI, the more crisp and good quality your image will be. This
+is another good reason to use SVG over these formats, however if you are
+limited to JPG or PNG, it may take some trial and error to find the
+correct combination of width, height and DPI.</p>
+</div>
+<div id="examples" class="section level2">
+<h2>Examples</h2>
+<div id="standalone-image-file" class="section level3">
+<h3>Standalone image file</h3>
+<p>The <code>ggsave()</code> function from <code>ggplot2</code> can be
+used to save a standalone image file. To specify the SVG file format,
+simply ensure your file name ends with <code>.svg</code>. The following
+example uses the recommended dimensions from the previous section.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(myplot, <span class="at">filename =</span> <span class="st">&quot;example-plot.svg&quot;</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">159</span>, <span class="at">height =</span> <span class="dv">100</span>, <span class="at">units =</span> <span class="st">&quot;mm&quot;</span>)</span></code></pre></div>
+<p>For a JPG or PNG image, also consider the DPI value. In
+<code>ggsave</code>, this can be supplied as a numerical value, or as a
+string input. For best quality, use “retina”.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(myplot, <span class="at">filename =</span> <span class="st">&quot;example-plot.png&quot;</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">159</span>, <span class="at">height =</span> <span class="dv">100</span>, <span class="at">units =</span> <span class="st">&quot;mm&quot;</span>, <span class="at">dpi =</span> <span class="st">&quot;retina&quot;</span>)</span></code></pre></div>
+</div>
+<div id="r-markdown" class="section level3">
+<h3>R Markdown</h3>
+<p>For charts in an R Markdown document, file format, dimensions and
+other settings can be set in the code chunk options.</p>
+<ul>
+<li><p><strong>Format</strong>: Set <code>dev = &quot;svg&quot;</code>, otherwise
+the default format of <code>png</code> will be used.</p></li>
+<li><p><strong>Dimensions</strong>: Set <code>fig.height</code> and
+<code>fig.width</code>. For HTML outputs, the default figure dimensions
+are often suitable, however when knitting to Microsoft Word, the default
+dimensions often result in a small image and so it is best to specify
+these in the R Markdown code chunk. Note that R Markdown requires figure
+dimensions in inches. If you’d rather use millimetres, use the
+<code>mm_to_inch</code> helper function from afcharts.</p></li>
+<li><p><strong>Alt Text</strong>: For HTML outputs, use
+<code>fig.alt</code>, and for Microsoft Word outputs,
+<code>fig.cap</code>. Note that by default, the value given to
+<code>fig.cap</code> will be shown under the chart. If you’d rather turn
+this off, you can control this in the R Markdown YAML header:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">word_document</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">fig_caption</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span></span></code></pre></div></li>
+</ul>
+<p>Set these options in a code chunk header:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot1, dev = &quot;svg&quot;, fig.width = mm_to_inch(159), fig.height = mm_to_inch(100), fig.alt = &quot;A description of plot1&quot;}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot1</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>It can sometimes make your code easier to read by specifying chunk
+options within the chunk:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot1}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| dev = &quot;svg&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig.width = mm_to_inch(159)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig.height = mm_to_inch(100)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig.alt = &quot;A description of plot1&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="in">plot1</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>If you would like all of your images to be in the same format, it is
+usually easier to set options globally in the first code chunk of your
+document:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include = FALSE}</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">  dev = &quot;svg&quot;,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">  fig.width = mm_to_inch(159), </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="in">  fig.height = mm_to_inch(100)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>Note that afcharts must be loaded before setting global options,
+otherwise you will need to specify the package when calling
+<code>mm_to_inch</code>; e.g. <code>afcharts::mm_to_inch()</code>.</p>
+<p>There may be cases where you’d like all charts to be in SVG format,
+but with different dimensions. In this case you can set
+<code>dev = &quot;svg&quot;</code> in the global options and
+<code>fig.width</code> and <code>fig.height</code> for each code chunk
+separately.</p>
+<div id="knitting-to-microsoft-word" class="section level4">
+<h4>Knitting to Microsoft Word</h4>
+<ul>
+<li><p>You may receive a warning message referring to
+<code>rsvg-convert</code> when knitting an R Markdown document
+containing SVG images to Microsoft Word. This can be safely
+ignored.</p></li>
+<li><p>It is not possible to centre charts or images when knitting to
+Microsoft Word. A workaround for this is to <a href="https://bookdown.org/yihui/rmarkdown-cookbook/word-template.html#word-template">use
+a Word style template document</a>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
