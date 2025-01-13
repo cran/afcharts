@@ -29,13 +29,12 @@ afcharts:::colour_table(afcharts::af_colour_palettes$sequential)
 afcharts:::colour_table(afcharts::af_colour_palettes$focus)
 
 ## ----view-colours, eval = FALSE, echo = TRUE----------------------------------
-#  # View names and hex codes for all colours
-#  afcharts::af_colour_values
-#  
-#  # View names and hex codes for all colour palettes
-#  afcharts::af_colour_palettes
-#  
-#  # View names and hex codes for `main` colour palette
-#  afcharts::af_colour_palettes$main
-#  
+# # View names and hex codes for all colours
+# afcharts::af_colour_values
+# 
+# # View names and hex codes for all colour palettes
+# afcharts::af_colour_palettes
+# 
+# # View names and hex codes for `main` colour palette
+# afcharts::af_colour_palettes$main
 

@@ -19,7 +19,7 @@ af_palette <- function(palette = "main",
 
   palette_list <- switch(
     palette_type,
-    af = af_colour_palettes
+    af = afcharts::af_colour_palettes
   )
 
   # Check valid palette name
@@ -41,8 +41,8 @@ af_palette <- function(palette = "main",
         grepl("main", palette)
     ) {
       palette <- "main2"
-      cli::cli_warn(c(
-        "!" = "Using `main2` as only two colours are required."
+      cli::cli_inform(c(
+        "i" = "Using `main2` palette as only two colours are required."
       ))
     }
 

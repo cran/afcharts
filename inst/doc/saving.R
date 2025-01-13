@@ -7,10 +7,13 @@ knitr::opts_chunk$set(
 )
 
 ## ----standalone-svg, eval = FALSE---------------------------------------------
-#  ggsave(myplot, filename = "example-plot.svg",
-#         width = 159, height = 100, units = "mm")
+# ggsave(filename = "example-plot.svg", plot = myplot,
+#        width = 159, height = 100, units = "mm")
 
 ## ----standalong-png, eval = FALSE---------------------------------------------
-#  ggsave(myplot, filename = "example-plot.png",
-#         width = 159, height = 100, units = "mm", dpi = "retina")
+# ggsave(filename = "example-plot.png", plot = myplot,
+#        width = 159, height = 100, units = "mm", dpi = "retina")
+
+## ----savegovuk, eval = FALSE--------------------------------------------------
+# save_govuk(filename = "example-plot.png", plot = myplot, device = "svg")
 
